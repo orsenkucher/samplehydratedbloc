@@ -128,7 +128,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "76a901960f41da541ec941d831b224249d1a8538"
+      resolved-ref: ce60f19c783334c8f51703710edbc0426b96667f
       url: "https://github.com/orsenkucher/hydrated_bloc.git"
     source: git
     version: "5.0.3"

@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 
 class User extends Equatable {
   final String name;
-  final Address address;
+  final List<Address> address;
   const User({this.name, this.address});
 
   @override
@@ -11,16 +11,18 @@ class User extends Equatable {
   Map<String, dynamic> toJson() {
     return {
       'name': name,
-      'address': address?.toJson(),
+      'address': address?.map((x) => x.toJson())?.toList(),
     };
   }
 
   static User fromJson(Map<String, dynamic> map) {
     if (map == null) return null;
-
+    final address =
+        map['address'].map<Address>((x) => Address.fromJson(x)).toList();
     return User(
       name: map['name'],
-      address: Address.fromJson(map['address']),
+      address: address,
+      // ?.cast<Address>(),
     );
   }
 

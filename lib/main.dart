@@ -77,7 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
     );
     const user = const User(
       name: "John Wick",
-      address: address,
+      address: [address, address, address],
     );
     // ignore: close_sinks
     final bloc = context.bloc<UserBloc>();
