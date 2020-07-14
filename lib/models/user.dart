@@ -18,7 +18,7 @@ class User extends Equatable {
     return {
       'name': name,
       'tree': tree,
-      'address': address?.map((x) => x.toJson())?.toList(),
+      'address': address,
     };
   }
 
