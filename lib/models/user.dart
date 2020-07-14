@@ -17,7 +17,7 @@ class User extends Equatable {
   Map<String, dynamic> toJson() {
     return {
       'name': name,
-      'tree': tree.toJson(),
+      'tree': tree,
       'address': address?.map((x) => x.toJson())?.toList(),
     };
   }
