@@ -70,13 +70,25 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void onSaveUser() {
-    const address = const Address(
+    const address = Address(
       streetName: "Alabama",
       city: "New York City",
       zipCode: 2490,
     );
-    const user = const User(
+    const tree = Tree(
+      question: Question(id: 0, question: "first"),
+      left: Tree(
+        question: Question(id: 1, question: "second"),
+      ),
+      right: Tree(
+        question: Question(id: 2, question: "third"),
+        left: Tree(question: Question(id: 3, question: "fourth")),
+        right: Tree(question: Question(id: 4, question: "fifth")),
+      ),
+    );
+    const user = User(
       name: "John Wick",
+      tree: tree,
       address: [address, address, address],
     );
     // ignore: close_sinks

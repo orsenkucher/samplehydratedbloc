@@ -1,28 +1,33 @@
 import 'package:equatable/equatable.dart';
+import 'package:json_annotation/json_annotation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'user.freezed.dart';
+part 'user.g.dart';
 
 class User extends Equatable {
   final String name;
   final List<Address> address;
-  const User({this.name, this.address});
+  final Tree tree;
+  const User({this.name, this.address, this.tree});
 
   @override
-  List<Object> get props => [name, address];
+  List<Object> get props => [name, address, tree];
 
   Map<String, dynamic> toJson() {
     return {
       'name': name,
+      'tree': tree.toJson(),
       'address': address?.map((x) => x.toJson())?.toList(),
     };
   }
 
   static User fromJson(Map<String, dynamic> map) {
     if (map == null) return null;
-    final address =
-        map['address'].map<Address>((x) => Address.fromJson(x)).toList();
     return User(
       name: map['name'],
-      address: address,
-      // ?.cast<Address>(),
+      tree: Tree.fromJson(map['tree'] ?? {}),
+      address: map['address'].map<Address>((x) => Address.fromJson(x)).toList(),
     );
   }
 
@@ -72,4 +77,26 @@ class Address extends Equatable {
   List<Object> get props => [streetName, city, zipCode];
   @override
   bool get stringify => true;
+}
+
+@freezed
+abstract class Question with _$Question {
+  const factory Question({
+    int id,
+    String question,
+  }) = _Question;
+
+  factory Question.fromJson(Map<String, dynamic> json) =>
+      _$QuestionFromJson(json);
+}
+
+@freezed
+abstract class Tree with _$Tree {
+  const factory Tree({
+    Question question,
+    Tree left,
+    Tree right,
+  }) = _QTree;
+
+  factory Tree.fromJson(Map<String, dynamic> json) => _$TreeFromJson(json);
 }
